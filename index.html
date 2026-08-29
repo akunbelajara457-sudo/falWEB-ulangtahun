@@ -88,16 +88,19 @@
             font-size: 1.05em;
         }
 
-        .form-group input {
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             padding: 15px;
             border: 3px solid #e0e0e0;
             border-radius: 10px;
             font-size: 1em;
             transition: all 0.3s;
+            resize: vertical;
         }
 
-        .form-group input:focus {
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
             border-color: #667eea;
             box-shadow: 0 0 10px rgba(102, 126, 234, 0.4);
@@ -651,6 +654,12 @@
                         </div>
                     </div>
 
+                    <!-- PESAN KHUSUS: pengguna bisa menulis sendiri -->
+                    <div class="form-group">
+                        <label for="customMessage">✍️ Pesan khusus (opsional):</label>
+                        <textarea id="customMessage" placeholder="Tulis pesan khusus untuk penerima..." rows="4"></textarea>
+                    </div>
+
                     <button type="submit" class="btn-submit">🎁 Buka Kejutan! 🎁</button>
                 </form>
             </div>
@@ -735,15 +744,15 @@
 
             `Selamat ulang tahun, cintaku. Semoga detik demi detik di umurmu yang baru dipenuhi tawa, mimpi yang jadi nyata, dan kasih yang tak pernah pudar. Aku selalu ada di sisimu, mendukung, mencintai, dan mendoakan yang terbaik untukmu.`,
 
-            `Untukmu yang selalu membuat hari-hariku berarti: semoga segala kebaikan kembali padamu berkali-kali lipat. Semoga Tuhan melimpahkan berkah, rezeki, dan kesehatan sepanjang tahun ini. Tetaplah jadi dirimu yang menawan.` ,
+            `Untukmu yang selalu membuat hari-hariku berarti: semoga segala kebaikan kembali padamu berkali-kali lipat. Semoga Tuhan melimpahkan berkah, rezeki, dan kesehatan sepanjang tahun ini. Tetaplah jadi dirimu yang menawan.`,
 
-            `Di hari spesial ini aku ingin mengingatkan betapa berharganya dirimu. Terima kasih untuk setiap tawa, pelukan, dan cerita. Semoga kamu selalu dikelilingi cinta dan kesempatan indah. Aku bangga memilikimu.` ,
+            `Di hari spesial ini aku ingin mengingatkan betapa berharganya dirimu. Terima kasih untuk setiap tawa, pelukan, dan cerita. Semoga kamu selalu dikelilingi cinta dan kesempatan indah. Aku bangga memilikimu.`,
 
-            `Hari ini adalah awal cerita baru — semoga semuanya berjalan indah seperti yang kamu harapkan. Doaku selalu menyertaimu; semoga jalanmu dipenuhi cahaya, dan impianmu cepat terwujud. Selamat ulang tahun, pelengkap hidupku.` ,
+            `Hari ini adalah awal cerita baru — semoga semuanya berjalan indah seperti yang kamu harapkan. Doaku selalu menyertaimu; semoga jalanmu dipenuhi cahaya, dan impianmu cepat terwujud. Selamat ulang tahun, pelengkap hidupku.`,
 
-            `Selamat ulang tahun! Semoga setiap doa yang kamu panjatkan dijawab, setiap usaha dibalas pencapaian, dan setiap langkah diberkati. Teruslah bersinar, karena dunia lebih indah karena hadirnya kamu.` ,
+            `Selamat ulang tahun! Semoga setiap doa yang kamu panjatkan dijawab, setiap usaha dibalas pencapaian, dan setiap langkah diberkati. Teruslah bersinar, karena dunia lebih indah karena hadirnya kamu.`,
 
-            `Pada hari ulang tahunmu ini, aku berharap kebahagiaanmu bertumbuh, kesedihan jauh, dan cinta selalu menguat. Terima kasih sudah menjadi tempatku pulang. Semoga tahun ini membawa cerita terindah untukmu.` ,
+            `Pada hari ulang tahunmu ini, aku berharap kebahagiaanmu bertumbuh, kesedihan jauh, dan cinta selalu menguat. Terima kasih sudah menjadi tempatku pulang. Semoga tahun ini membawa cerita terindah untukmu.`,
 
             `Ucapan singkat: Aku sayang kamu. Doaku untukmu: sehat, bahagia, dan sukses selalu. Semoga ulang tahun ini jadi pintu menuju banyak berkah.`
         ];
@@ -801,8 +810,9 @@
         function openLetterModal() {
             const modal = document.getElementById('letterModal');
             
-            // Pilih ucapan random
-            const ucapan = ucapanList[Math.floor(Math.random() * ucapanList.length)];
+            // Gunakan pesan custom jika ada, jika tidak pilih ucapan random
+            const custom = document.getElementById('customMessage')?.value?.trim();
+            const ucapan = custom && custom.length > 0 ? custom : ucapanList[Math.floor(Math.random() * ucapanList.length)];
             
             // Format pesan
             const pesan = `Dear ${userData.nama},\n\n${ucapan}`;
