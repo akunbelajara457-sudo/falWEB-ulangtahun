@@ -5,880 +5,149 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎉 Selamat Ulang Tahun! 🎉</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .page {
-            display: none;
-            animation: fadeIn 0.8s ease-in;
-        }
-
-        .page.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ===== HALAMAN INPUT FORM ===== */
-        .form-container {
-            background: white;
-            padding: 50px 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .form-container h1 {
-            color: #667eea;
-            margin-bottom: 10px;
-            font-size: 2.8em;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-            animation: bounce 1s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .subtitle {
-            color: #666;
-            margin-bottom: 35px;
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 10px;
-            color: #333;
-            font-weight: bold;
-            font-size: 1.05em;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 15px;
-            border: 3px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 1em;
-            transition: all 0.3s;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 10px rgba(102, 126, 234, 0.4);
-            transform: scale(1.02);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1.5fr 1fr;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .form-row .form-group {
-            margin-bottom: 0;
-        }
-
-        .form-row .form-group input {
-            text-align: center;
-            font-size: 1.1em;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 18px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 15px;
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-submit:active {
-            transform: translateY(-1px);
-        }
-
-        /* ===== HALAMAN KUE DAN SURAT ===== */
-        .cake-container {
-            background: white;
-            padding: 40px;
-            border-radius: 25px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            text-align: center;
-        }
-
-        .cake-3d {
-            margin: 30px 0 40px 0;
-            perspective: 1000px;
-            height: 350px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* ===== KUE 3D ===== */
-        .cake {
-            position: relative;
-            width: 200px;
-            height: 220px;
-            transform-style: preserve-3d;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotateY(0deg); }
-            50% { transform: translateY(-30px) rotateY(10deg); }
-        }
-
-        .cake-layer {
-            position: absolute;
-            width: 200px;
-            height: 70px;
-            background: linear-gradient(145deg, #d4a574, #a0522d);
-            border-radius: 15px;
-            box-shadow: 
-                inset -3px -3px 8px rgba(0, 0, 0, 0.4), 
-                5px 5px 20px rgba(0, 0, 0, 0.25),
-                inset 2px 2px 5px rgba(255, 255, 255, 0.2);
-            left: 0;
-            right: 0;
-            margin: 0 auto;
-        }
-
-        .cake-layer.layer1 {
-            bottom: 0;
-            background: linear-gradient(145deg, #8b4513, #654321);
-            box-shadow: 
-                inset -3px -3px 8px rgba(0, 0, 0, 0.5), 
-                0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-
-        .cake-layer.layer1::before {
-            content: '';
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            right: 15px;
-            height: 15px;
-            background: linear-gradient(180deg, #a0522d 0%, transparent 100%);
-            border-radius: 50%;
-        }
-
-        .cake-layer.layer2 {
-            bottom: 70px;
-            width: 170px;
-            left: 15px;
-            background: linear-gradient(145deg, #cd853f, #996515);
-            box-shadow: 
-                inset -3px -3px 8px rgba(0, 0, 0, 0.4), 
-                5px 5px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .cake-layer.layer2::before {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 15px;
-            right: 15px;
-            height: 12px;
-            background: linear-gradient(180deg, #cd853f 0%, transparent 100%);
-            border-radius: 50%;
-        }
-
-        .cake-layer.layer3 {
-            bottom: 140px;
-            width: 140px;
-            left: 30px;
-            background: linear-gradient(145deg, #daa520, #b8860b);
-            box-shadow: 
-                inset -3px -3px 8px rgba(0, 0, 0, 0.35), 
-                5px 5px 20px rgba(0, 0, 0, 0.25);
-        }
-
-        .cake-layer.layer3::before {
-            content: '';
-            position: absolute;
-            top: 12px;
-            left: 15px;
-            right: 15px;
-            height: 12px;
-            background: linear-gradient(180deg, #daa520 0%, transparent 100%);
-            border-radius: 50%;
-        }
-
-        .cake-decoration {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5em;
-        }
-
-        .decoration-item {
-            display: inline-block;
-            margin: 0 5px;
-            animation: rotate 2s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* ===== LILIN ===== */
-        .candles {
-            position: absolute;
-            top: 110px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 25px;
-            z-index: 10;
-        }
-
-        .candle {
-            width: 10px;
-            height: 50px;
-            background: linear-gradient(90deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%);
-            border-radius: 5px;
-            position: relative;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
-        }
-
-        .candle::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 6px;
-            height: 8px;
-            background: #fff;
-            border-radius: 50%;
-        }
-
-        .flame {
-            position: absolute;
-            width: 8px;
-            height: 18px;
-            background: linear-gradient(180deg, #ff6b00 0%, #ffd700 50%, #ff8c00 100%);
-            top: -18px;
-            left: 1px;
-            border-radius: 50% 50% 50% 0;
-            animation: flicker 0.6s infinite;
-            box-shadow: 
-                0 0 15px rgba(255, 107, 0, 0.9),
-                0 0 25px rgba(255, 215, 0, 0.6);
-        }
-
-        @keyframes flicker {
-            0%, 100% {
-                transform: translateY(0) scaleY(1);
-                opacity: 1;
-                height: 18px;
-            }
-            50% {
-                transform: translateY(-5px) scaleY(1.2);
-                opacity: 0.9;
-                height: 22px;
-            }
-        }
-
-        /* ===== GREETING TEXT ===== */
-        .greeting {
-            color: #764ba2;
-            font-size: 2.2em;
-            margin: 20px 0;
-            animation: slideIn 0.8s ease-out;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .greeting-date {
-            color: #667eea;
-            font-size: 1.3em;
-            margin: 10px 0 30px 0;
-            font-style: italic;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        /* ===== SURAT ===== */
-        .letter-container {
-            margin: 30px 0;
-        }
-
-        .letter {
-            background: linear-gradient(135deg, #fff8e7 0%, #ffe4b5 100%);
-            padding: 35px;
-            border-radius: 15px;
-            border: 3px solid #d4a574;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .letter::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .letter-header {
-            text-align: center;
-            margin-bottom: 25px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .heart {
-            font-size: 2.5em;
-            display: block;
-            margin-bottom: 12px;
-            animation: heartbeat 1.2s ease-in-out infinite;
-        }
-
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-        }
-
-        .letter-header h3 {
-            color: #764ba2;
-            font-size: 1.4em;
-            margin: 0;
-        }
-
-        .letter-content {
-            color: #333;
-            line-height: 1.5;
-            text-align: center;
-            margin: 20px 0;
-            font-size: 0.95em;
-            position: relative;
-            z-index: 2;
-        }
-
-        .btn-open-letter {
-            padding: 15px 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 25px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1.05em;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-        }
-
-        .btn-open-letter:hover {
-            transform: scale(1.08) translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.6);
-        }
-
-        .btn-open-letter:active {
-            transform: scale(1.05);
-        }
-
-        /* ===== TOMBOL NAVIGASI ===== */
-        .btn-back {
-            padding: 12px 30px;
-            background: #999;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 25px;
-            font-size: 1em;
-        }
-
-        .btn-back:hover {
-            background: #777;
-            transform: translateY(-2px);
-        }
-
-        /* ===== MODAL SURAT ===== */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6);
-            animation: fadeIn 0.4s ease-out;
-        }
-
-        .modal.show {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background: linear-gradient(135deg, #fff8e7 0%, #ffe4b5 100%);
-            padding: 45px;
-            border-radius: 20px;
-            border: 4px solid #d4a574;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-            max-width: 550px;
-            width: 90%;
-            animation: slideUp 0.5s ease-out;
-            position: relative;
-            text-align: center;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(100px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .close-btn {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            background: #ffcdd2;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.5em;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .close-btn:hover {
-            background: #ff9999;
-            transform: scale(1.1);
-        }
-
-        .letter-message {
-            color: #333;
-            line-height: 1.9;
-            font-size: 1.1em;
-            text-align: center;
-            white-space: pre-line;
-            word-wrap: break-word;
-            margin: 20px 0;
-            font-style: italic;
-        }
-
-        .letter-signature {
-            margin-top: 30px;
-            font-size: 1.2em;
-        }
-
-        /* ===== CONFETTI ===== */
-        @keyframes confettiFall {
-            0% {
-                opacity: 1;
-                transform: translateY(0) rotateZ(0deg);
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(100vh) rotateZ(720deg);
-            }
-        }
-
-        .confetti {
-            position: fixed;
-            pointer-events: none;
-            animation: confettiFall 3s linear forwards;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 600px) {
-            .form-container, .cake-container {
-                padding: 25px;
-            }
-
-            .form-container h1 {
-                font-size: 2em;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row .form-group input {
-                text-align: left;
-            }
-
-            .greeting {
-                font-size: 1.6em;
-            }
-
-            .cake-3d {
-                height: 280px;
-            }
-
-            .modal-content {
-                padding: 30px;
-                margin: 20px;
-            }
-
-            .letter-message {
-                font-size: 1em;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg,#667eea 0%,#764ba2 100%); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px }
+        .container{ width:100%; max-width:600px }
+        .page{ display:none; animation:fadeIn .8s ease-in }
+        .page.active{ display:block }
+        @keyframes fadeIn{ from{opacity:0; transform:translateY(20px)} to{opacity:1; transform:translateY(0)} }
+
+        .form-container{ background:white; padding:50px 40px; border-radius:25px; box-shadow:0 20px 60px rgba(0,0,0,.3); text-align:center }
+        .form-container h1{ color:#667eea; margin-bottom:10px; font-size:2.4em; text-shadow:2px 2px 4px rgba(0,0,0,.1); }
+        .subtitle{ color:#666; margin-bottom:20px; font-size:1.05em }
+        .form-group{ margin-bottom:18px; text-align:left }
+        .form-group label{ display:block; margin-bottom:8px; color:#333; font-weight:600 }
+        input{ width:100%; padding:12px 14px; border:2px solid #e6e6e6; border-radius:10px }
+        .form-row{ display:grid; grid-template-columns:1fr 1.2fr 1fr; gap:12px; margin-bottom:18px }
+        .btn-submit{ width:100%; padding:14px; background:linear-gradient(135deg,#667eea,#764ba2); color:white; border:none; border-radius:12px; font-weight:700; cursor:pointer }
+
+        .cake-container{ background:white; padding:30px; border-radius:20px; box-shadow:0 20px 60px rgba(0,0,0,.25); text-align:center }
+        .cake-3d{ margin:20px 0; perspective:900px; height:300px; display:flex; align-items:center; justify-content:center }
+        .cake{ position:relative; width:200px; height:200px; transform-style:preserve-3d; animation:float 3s ease-in-out infinite }
+        @keyframes float{ 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+        .cake-layer{ position:absolute; width:200px; height:60px; border-radius:14px; left:0; right:0; margin:0 auto }
+        .layer1{ bottom:0; background:linear-gradient(145deg,#8b4513,#654321) }
+        .layer2{ bottom:56px; width:170px; left:15px; background:linear-gradient(145deg,#cd853f,#996515) }
+        .layer3{ bottom:108px; width:140px; left:30px; background:linear-gradient(145deg,#daa520,#b8860b) }
+        .candles{ position:absolute; top:80px; left:50%; transform:translateX(-50%); display:flex; gap:18px }
+        .flame{ width:8px; height:16px; background:linear-gradient(180deg,#ff6b00,#ffd700); border-radius:50% }
+
+        .greeting{ color:#764ba2; font-size:1.7em; margin:14px 0; font-weight:700 }
+        .greeting-date{ color:#667eea; margin-bottom:12px }
+
+        .letter{ background:linear-gradient(135deg,#fff8e7,#ffe4b5); padding:20px; border-radius:12px; border:2px solid #d4a574 }
+        .letter-header{ text-align:center; margin-bottom:10px }
+        .heart{ font-size:1.6em }
+        .letter-content{ color:#333; margin-bottom:12px }
+        .btn-open-letter{ padding:10px 18px; border-radius:12px; border:none; background:linear-gradient(135deg,#667eea,#764ba2); color:white; cursor:pointer }
+
+        .modal{ display:none; position:fixed; left:0; top:0; right:0; bottom:0; background:rgba(0,0,0,.6); align-items:center; justify-content:center }
+        .modal.show{ display:flex }
+        .modal-content{ background:linear-gradient(135deg,#fff8e7,#ffe4b5); padding:24px; border-radius:12px; max-width:520px; text-align:center }
+        .close-btn{ position:absolute; right:14px; top:14px; background:#ffcdd2; border-radius:50%; width:36px; height:36px; border:none }
+        .letter-message{ white-space:pre-line; text-align:left; color:#222 }
+
+        @media (max-width:600px){ .form-row{ grid-template-columns:1fr } .greeting{ font-size:1.4em } }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- ===== HALAMAN 1: FORM INPUT ===== -->
         <div id="formPage" class="page active">
             <div class="form-container">
                 <h1>🎉 Selamat Ulang Tahun! 🎉</h1>
-                <p class="subtitle">✨ Isi data untuk mendapatkan kejutan spesial ✨</p>
-                
+                <p class="subtitle">Isi data, lalu buka surat cinta & doa spesial.</p>
+
                 <form id="birthdayForm" onsubmit="handleSubmit(event)">
                     <div class="form-group">
-                        <label for="nama">👤 Nama Lengkap:</label>
-                        <input 
-                            type="text" 
-                            id="nama" 
-                            placeholder="Masukkan nama Anda" 
-                            required
-                        >
+                        <label for="nama">Nama penerima</label>
+                        <input id="nama" type="text" placeholder="Contoh: Sayang" required>
                     </div>
 
                     <div class="form-row">
-                        <div class="form-group">
-                            <label for="hari">📅 Hari:</label>
-                            <input 
-                                type="number" 
-                                id="hari" 
-                                min="1" 
-                                max="31" 
-                                placeholder="01" 
-                                required
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label for="bulan">📆 Bulan:</label>
-                            <input 
-                                type="number" 
-                                id="bulan" 
-                                min="1" 
-                                max="12" 
-                                placeholder="01" 
-                                required
-                            >
-                        </div>
-                        <div class="form-group">
-                            <label for="tahun">📍 Tahun:</label>
-                            <input 
-                                type="number" 
-                                id="tahun" 
-                                min="1900" 
-                                max="2024" 
-                                placeholder="2000" 
-                                required
-                            >
-                        </div>
+                        <div class="form-group"><label for="hari">Hari</label><input id="hari" type="number" min="1" max="31" placeholder="01" required></div>
+                        <div class="form-group"><label for="bulan">Bulan</label><input id="bulan" type="number" min="1" max="12" placeholder="01" required></div>
+                        <div class="form-group"><label for="tahun">Tahun</label><input id="tahun" type="number" min="1900" max="2099" placeholder="2000" required></div>
                     </div>
 
-                    <!-- PESAN KHUSUS: pengguna bisa menulis sendiri -->
-                    <div class="form-group">
-                        <label for="customMessage">✍️ Pesan khusus (opsional):</label>
-                        <textarea id="customMessage" placeholder="Tulis pesan khusus untuk penerima..." rows="4"></textarea>
-                    </div>
-
-                    <button type="submit" class="btn-submit">🎁 Buka Kejutan! 🎁</button>
+                    <button type="submit" class="btn-submit">🎁 Buka Kejutan!</button>
                 </form>
             </div>
         </div>
 
-        <!-- ===== HALAMAN 2: KUE & SURAT ===== -->
         <div id="cakePage" class="page">
             <div class="cake-container">
-                <!-- KUE 3D -->
                 <div class="cake-3d">
                     <div class="cake">
-                        <!-- Layer Kue -->
                         <div class="cake-layer layer1"></div>
                         <div class="cake-layer layer2"></div>
                         <div class="cake-layer layer3"></div>
-
-                        <!-- Dekorasi Kue -->
-                        <div class="cake-decoration">
-                            <span class="decoration-item">🌟</span>
-                            <span class="decoration-item">✨</span>
-                            <span class="decoration-item">🌟</span>
-                        </div>
-
-                        <!-- Lilin -->
-                        <div class="candles">
-                            <div class="candle">
-                                <div class="flame"></div>
-                            </div>
-                            <div class="candle">
-                                <div class="flame"></div>
-                            </div>
-                            <div class="candle">
-                                <div class="flame"></div>
-                            </div>
-                        </div>
+                        <div class="candles"><div class="flame"></div><div class="flame"></div><div class="flame"></div></div>
                     </div>
                 </div>
 
-                <!-- UCAPAN -->
                 <h2 id="greeting" class="greeting"></h2>
-                <p id="greetingDate" class="greeting-date"></p>
+                <div id="greetingDate" class="greeting-date"></div>
 
-                <!-- SURAT UCAPAN -->
-                <div class="letter-container">
-                    <div class="letter">
-                        <div class="letter-header">
-                            <span class="heart">💌</span>
-                            <h3>Surat Spesial Untuk Mu</h3>
-                        </div>
-                        <div class="letter-content">Klik tombol di bawah untuk membaca ucapan yang kami siapkan khusus untuk Anda...</div>
-                        <button type="button" class="btn-open-letter" onclick="openLetterModal()">
-                            💝 Buka Surat Ucapan 💝
-                        </button>
-                    </div>
+                <div class="letter">
+                    <div class="letter-header"><span class="heart">💌</span><h3>Surat Cinta & Doa</h3></div>
+                    <div class="letter-content">Di sini akan muncul surat cinta dan doa spesial untuk penerima. Tekan tombol untuk membukanya.</div>
+                    <button class="btn-open-letter" onclick="openLetterModal()">💝 Buka Surat</button>
                 </div>
 
-                <button type="button" class="btn-back" onclick="backToForm()">← Kembali</button>
+                <button class="btn-back" onclick="backToForm()" style="margin-top:12px">← Kembali</button>
             </div>
         </div>
     </div>
 
-    <!-- ===== MODAL SURAT ===== -->
-    <div id="letterModal" class="modal">
+    <div id="letterModal" class="modal" aria-hidden="true">
         <div class="modal-content">
-            <button type="button" class="close-btn" onclick="closeLetterModal()">×</button>
-            <div class="letter-header">
-                <span class="heart">💌</span>
-                <h3>Ucapan Istimewa Untukmu</h3>
-            </div>
+            <button class="close-btn" onclick="closeLetterModal()">×</button>
+            <div class="letter-header"><span class="heart">💌</span><h3>Untukmu</h3></div>
             <div id="letterMessage" class="letter-message"></div>
-            <div class="letter-signature">
-                ✨ Semoga Harimu Penuh Berkah ✨<br>
-                With Love & Gratitude 💝
-            </div>
+            <div style="margin-top:12px; font-weight:600; color:#444">✨ Semoga harimu diberkati ✨</div>
         </div>
     </div>
 
     <script>
-        // ===== DATA UCAPAN ===== 
-        const ucapanList = [
-            `Di setiap napas dan senyummu, aku menemukan alasan untuk bersyukur. Di hari istimewa ini, aku berdoa semoga kamu selalu diberi kesehatan, kebahagiaan yang tulus, dan keberkahan dalam setiap langkah. Terima kasih sudah menjadi pelita dalam hidupku — aku sayang kamu lebih dari kata-kata.`,
+        let userData = { nama:'', tanggal:'' };
 
-            `Selamat ulang tahun, cintaku. Semoga detik demi detik di umurmu yang baru dipenuhi tawa, mimpi yang jadi nyata, dan kasih yang tak pernah pudar. Aku selalu ada di sisimu, mendukung, mencintai, dan mendoakan yang terbaik untukmu.`,
-
-            `Untukmu yang selalu membuat hari-hariku berarti: semoga segala kebaikan kembali padamu berkali-kali lipat. Semoga Tuhan melimpahkan berkah, rezeki, dan kesehatan sepanjang tahun ini. Tetaplah jadi dirimu yang menawan.`,
-
-            `Di hari spesial ini aku ingin mengingatkan betapa berharganya dirimu. Terima kasih untuk setiap tawa, pelukan, dan cerita. Semoga kamu selalu dikelilingi cinta dan kesempatan indah. Aku bangga memilikimu.`,
-
-            `Hari ini adalah awal cerita baru — semoga semuanya berjalan indah seperti yang kamu harapkan. Doaku selalu menyertaimu; semoga jalanmu dipenuhi cahaya, dan impianmu cepat terwujud. Selamat ulang tahun, pelengkap hidupku.`,
-
-            `Selamat ulang tahun! Semoga setiap doa yang kamu panjatkan dijawab, setiap usaha dibalas pencapaian, dan setiap langkah diberkati. Teruslah bersinar, karena dunia lebih indah karena hadirnya kamu.`,
-
-            `Pada hari ulang tahunmu ini, aku berharap kebahagiaanmu bertumbuh, kesedihan jauh, dan cinta selalu menguat. Terima kasih sudah menjadi tempatku pulang. Semoga tahun ini membawa cerita terindah untukmu.`,
-
-            `Ucapan singkat: Aku sayang kamu. Doaku untukmu: sehat, bahagia, dan sukses selalu. Semoga ulang tahun ini jadi pintu menuju banyak berkah.`
-        ];
-
-        let userData = {
-            nama: '',
-            tanggal: ''
-        };
-
-        // ===== HANDLE SUBMIT FORM ===== 
-        function handleSubmit(event) {
-            event.preventDefault();
-
+        function handleSubmit(e){
+            e.preventDefault();
             const nama = document.getElementById('nama').value.trim();
-            const hari = document.getElementById('hari').value.padStart(2, '0');
-            const bulan = document.getElementById('bulan').value.padStart(2, '0');
+            const hari = document.getElementById('hari').value.padStart(2,'0');
+            const bulan = document.getElementById('bulan').value.padStart(2,'0');
             const tahun = document.getElementById('tahun').value;
-
-            // Validasi
-            if (!nama || !hari || !bulan || !tahun) {
-                alert('⚠️ Mohon isi semua data dengan lengkap!');
-                return;
-            }
-
-            // Simpan data
-            userData.nama = nama;
-            userData.tanggal = `${hari}/${bulan}/${tahun}`;
-
-            // Tampilkan halaman kue
+            if(!nama || !hari || !bulan || !tahun){ alert('Isi semua data dulu'); return }
+            userData.nama = nama; userData.tanggal = `${hari}/${bulan}/${tahun}`;
             showCakePage();
         }
 
-        // ===== TAMPILKAN HALAMAN KUE ===== 
-        function showCakePage() {
-            // Sembunyikan form
+        function showCakePage(){
             document.getElementById('formPage').classList.remove('active');
             document.getElementById('cakePage').classList.add('active');
-
-            // Update greeting
-            const greetingEl = document.getElementById('greeting');
-            const bulanNames = ['', 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
-                                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
-
-            const [hari, bulan, tahun] = userData.tanggal.split('/');
-            const bulanName = bulanNames[parseInt(bulan)];
-
-            greetingEl.textContent = `Selamat Ulang Tahun, ${userData.nama}!`;
-            document.getElementById('greetingDate').textContent = `${hari} ${bulanName} ${tahun}`;
-
-            // Trigger confetti
+            const bulanNames=['','Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+            const [h,b,t] = userData.tanggal.split('/');
+            document.getElementById('greeting').textContent = `Selamat Ulang Tahun, ${userData.nama}!`;
+            document.getElementById('greetingDate').textContent = `${h} ${bulanNames[parseInt(b)] || ''} ${t}`;
             createConfetti();
         }
 
-        // ===== BUKA MODAL SURAT ===== 
-        function openLetterModal() {
-            const modal = document.getElementById('letterModal');
-            
-            // Gunakan pesan custom jika ada, jika tidak pilih ucapan random
-            const custom = document.getElementById('customMessage')?.value?.trim();
-            const ucapan = custom && custom.length > 0 ? custom : ucapanList[Math.floor(Math.random() * ucapanList.length)];
-            
-            // Format pesan
-            const pesan = `Dear ${userData.nama},\n\n${ucapan}`;
-            
+        function openLetterModal(){
+            // Pesan tetap: surat cinta + doa (personalized dengan nama)
+            const pesan = `Kekasihku ${userData.nama},\n\nSelamat ulang tahun. Di hari istimewa ini aku mengirimkan seluruh cinta dan doa yang tulus untukmu. Semoga Tuhan selalu melimpahkan kesehatan, kebahagiaan, dan rezeki. Semoga setiap langkahmu diberkati dan impian-impianmu cepat terwujud.\n\nAku mencintaimu lebih dari kata-kata, dan selalu mendoakan yang terbaik untukmu. Amin.`;
             document.getElementById('letterMessage').textContent = pesan;
-            modal.classList.add('show');
-
-            // Trigger confetti tambahan
+            const modal = document.getElementById('letterModal');
+            modal.classList.add('show'); modal.setAttribute('aria-hidden','false');
             createConfetti();
         }
 
-        // ===== TUTUP MODAL SURAT ===== 
-        function closeLetterModal() {
-            const modal = document.getElementById('letterModal');
-            modal.classList.remove('show');
-        }
+        function closeLetterModal(){ const modal=document.getElementById('letterModal'); modal.classList.remove('show'); modal.setAttribute('aria-hidden','true'); }
 
-        // ===== KEMBALI KE FORM ===== 
-        function backToForm() {
-            document.getElementById('cakePage').classList.remove('active');
-            document.getElementById('formPage').classList.add('active');
-            document.getElementById('birthdayForm').reset();
-            userData = {
-                nama: '',
-                tanggal: ''
-            };
-        }
+        function backToForm(){ document.getElementById('cakePage').classList.remove('active'); document.getElementById('formPage').classList.add('active'); document.getElementById('birthdayForm').reset(); userData={nama:'', tanggal:''}; }
 
-        // ===== TUTUP MODAL JIKA KLIK DI LUAR ===== 
-        window.addEventListener('click', function(e) {
-            const modal = document.getElementById('letterModal');
-            if (e.target === modal) {
-                closeLetterModal();
-            }
-        });
+        window.addEventListener('click', (e)=>{ const modal=document.getElementById('letterModal'); if(e.target===modal) closeLetterModal(); });
 
-        // ===== BUAT CONFETTI EFFECT ===== 
-        function createConfetti() {
-            const confettiPieces = 60;
-            
-            for (let i = 0; i < confettiPieces; i++) {
-                const confetti = document.createElement('div');
-                confetti.className = 'confetti';
-                
-                const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#FFA07A', '#98D8C8', '#F7DC6F', '#BB8FCE', '#85C1E2', '#FFD93D', '#6BCB77'];
-                const randomColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.top = '-10px';
-                confetti.style.width = (Math.random() * 10 + 5) + 'px';
-                confetti.style.height = (Math.random() * 10 + 5) + 'px';
-                confetti.style.backgroundColor = randomColor;
-                confetti.style.borderRadius = '50%';
-                confetti.style.zIndex = '999';
-                
-                const delay = Math.random() * 0.5;
-                confetti.style.animationDelay = delay + 's';
-                
-                document.body.appendChild(confetti);
-                
-                // Hapus element setelah animasi selesai
-                setTimeout(() => {
-                    confetti.remove();
-                }, 3500 + (delay * 1000));
-            }
-        }
+        function createConfetti(){ const pieces=50; const colors=['#FF6B6B','#4ECDC4','#45B7D1','#FFA07A','#98D8C8','#F7DC6F']; for(let i=0;i<pieces;i++){ const c=document.createElement('div'); c.className='confetti'; c.style.left = Math.random()*100 + '%'; c.style.top='-10px'; c.style.width=(6+Math.random()*10)+'px'; c.style.height=(6+Math.random()*10)+'px'; c.style.background = colors[Math.floor(Math.random()*colors.length)]; c.style.borderRadius='50%'; c.style.zIndex='999'; const delay=Math.random()*0.5; c.style.animationDelay = delay + 's'; document.body.appendChild(c); setTimeout(()=>c.remove(), 3500 + delay*1000); } }
     </script>
 </body>
 </html>
